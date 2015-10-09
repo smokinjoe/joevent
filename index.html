@@ -8,4 +8,11 @@
   <h2>HELLO!</h2>
   <script type="text/javascript" src="joevent.js"></script>
 </body>
+<script type="text/javascript">
+  j.debug();
+  j.set('fire', 'loggin', () => console.log('JOE:'));
+  j.fire('fire');
+  j.remove('fire', 'loggin');
+
+</script>
 </html>
