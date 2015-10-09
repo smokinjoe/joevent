@@ -4,14 +4,14 @@ var j = (function () {
   var hooks = {};
 
   // private methods
-  var _callHhook = function (method, args, context) {
+  var _callHook = (method, args, context) => {
     args.push(context);  // should this be here or in fire() ?
     method.apply(window, args);
   };
 
   // public methods
   return {
-    set: function (e, name, method, args) {
+    set: (e, name, method, args) => {
       if (debug) console.log('set: ' + name + ' for ' + e);
 
       hooks[e] = hooks[e] || {};
@@ -22,14 +22,14 @@ var j = (function () {
         'args' : (typeof args === Array) ? args : [args] // this needs to be an array
       };
     },
-    remove: function (e, name) {
-      if (debug) console.log('remove: ' + arg);
+    remove: (e, name) => {
+      if (debug) console.log('remove: ' + e + '[' + name + ']');
 
       if (typeof hooks[e][name] !== undefined) {
         delete hooks[e][name];
       }
     },
-    fire: function (e, context) {
+    fire: (e, context) => {
       if (debug) console.log('fire: ' + e);
 
       var context = context || self;
@@ -41,7 +41,7 @@ var j = (function () {
         }
       }
     },
-    debug: function () {
+    debug: () => {
       debug = true;
     }
   };
