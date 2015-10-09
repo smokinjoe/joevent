@@ -26,7 +26,7 @@ var j = (function () {
     },
     remove: (e, name) => {
       if (debug) {
-        var string = name ? 'remove: ' + e + '[' + name + ']' : 'remove all for ' + e;
+        var string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'remove all for ' + e;
         console.log(string);
       }
 
@@ -38,7 +38,7 @@ var j = (function () {
       }
     },
     fire: (e, context) => {
-      if (debug) console.log('fire: ' + e);
+      if (debug) console.log('FIRE: ' + e);
 
       var context = context || self;
 
@@ -46,6 +46,21 @@ var j = (function () {
         for (var key in hooks[e]) {
           var hook = hooks[e][key];
           _callHook(hook.method, hook.args, context);
+        }
+      }
+    },
+    list: (e, name) => {
+      if (debug) {
+        if (e && name) {
+          if (typeof hooks[e][name] !== 'undefined') console.log("LIST: ", hooks[e][name]);
+        }
+        else if (e) {
+          if (typeof hooks[e] !== 'undefined') {
+            console.log("LIST: hooks["+e+"]:", hooks[e]);
+          }
+        }
+        else {
+          console.log("LIST: hooks: ", hooks);
         }
       }
     },
