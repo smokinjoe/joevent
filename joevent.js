@@ -25,7 +25,10 @@ var j = (function () {
     remove: (e, name) => {
       if (debug) console.log('remove: ' + e + '[' + name + ']');
 
-      if (typeof hooks[e][name] !== undefined) {
+      if (typeof name === 'undefined') {
+        delete hooks[e];
+      }
+      else if (typeof hooks[e][name] !== 'undefined') {
         delete hooks[e][name];
       }
     },
@@ -34,7 +37,7 @@ var j = (function () {
 
       var context = context || self;
 
-      if (typeof hooks[e] !== undefined) {
+      if (typeof hooks[e] !== 'undefined') {
         for (var key in hooks[e]) {
           var hook = hooks[e][key];
           _callHook(hook.method, hook.args, context);
