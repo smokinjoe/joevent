@@ -12,7 +12,9 @@ var j = (function () {
   // public methods
   return {
     set: (e, name, method, args) => {
-      if (debug) console.log('set: ' + name + ' for ' + e);
+      if (debug) {
+        console.log('set: ' +( name ? name : 'all') + ' for ' + e);
+      }
 
       hooks[e] = hooks[e] || {};
       hooks[e][name] = hooks[e][name] || [];
@@ -23,7 +25,10 @@ var j = (function () {
       };
     },
     remove: (e, name) => {
-      if (debug) console.log('remove: ' + e + '[' + name + ']');
+      if (debug) {
+        var string = name ? 'remove: ' + e + '[' + name + ']' : 'remove all for ' + e;
+        console.log(string);
+      }
 
       if (typeof name === 'undefined') {
         delete hooks[e];
