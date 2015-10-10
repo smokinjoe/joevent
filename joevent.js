@@ -1,7 +1,7 @@
 var j = (function () {
   // private vars
-  var debug = false;
-  var hooks = {};
+  let debug = false;
+  let hooks = {};
 
   // private methods
   var _callHook = (method, args, context) => {

@@ -6,16 +6,18 @@
 </head>
   <body>
     <h2>HELLO!</h2>
-    <script type="text/javascript" src="joevent.js"></script>
+    <script type="text/javascript" src="joevent.es6.js"></script>
   </body>
   <script type="text/javascript">
-    j.debug();
-    j.set('fire', 'loggin', () => console.log('JOE:'));
-    j.fire('fire');
-    j.set('eep', 'one', () => console.log('JOE:'));
-    j.set('eep', 'two', () => console.log('JOE:'));
+    J.debug();
+    J.on('fire', 'loggin', () => console.log('JOE:'));
+    J.fire('fire');
+    J.on('eep', 'one', () => console.log('JOE:'));
+    J.on('eep', 'two', () => console.log('JOE:'));
+    
+    J.fire('eep');
 
-    j.remove('eep');
-    j.remove('fire', 'loggin');
+    J.remove('eep');
+    J.remove('fire', 'loggin');
   </script>
 </html>
