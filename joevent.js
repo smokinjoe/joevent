@@ -29,6 +29,7 @@ const j = (function () {
         console.log(string);
       }
 
+      // Optimize this - reduce to if/else
       if (typeof name === 'undefined') {
         delete hooks[e];
       }

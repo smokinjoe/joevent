@@ -9,13 +9,49 @@
     <script type="text/javascript" src="joevent.js"></script>
   </body>
   <script type="text/javascript">
-    j.debug();
-    j.set('fire', 'loggin', () => console.log('JOE:'));
-    j.fire('fire');
-    j.set('eep', 'one', () => console.log('JOE:'));
-    j.set('eep', 'two', () => console.log('JOE:'));
 
-    j.remove('eep');
-    j.remove('fire', 'loggin');
+    // Uncomment below to view all sets/fires/removes and be able to utilize
+    // j.list to view any and all hooks set
+    // j.debug();
+
+    // =====================================================
+    // Setting an event hook with a function and arguments
+    const arg1 = 'Hello';
+    const arg2 = 'World';
+    const arg3 = '!!!';
+
+    function welcomer (string1, string2) {
+      console.log(string1 + ' ' + string2);
+    };
+
+    j.set('welcome', 'welcomer', welcomer, [arg1, arg2]);
+    // =====================================================
+
+
+    // =====================================================
+    // Showing off how the context can be changed when triggering the hook event
+    window.name = 'window';
+    const obj1 = { name: 'joe' };
+    const obj2 = { name: 'ed' };
+
+    function outputName () {
+      console.log(this.name);
+    }
+
+    j.set('name', 'obj1', outputName);
+    j.fire('name', obj1);
+    j.fire('name');
+    j.fire('name', obj2);
+    // =====================================================
+
+    // =====================================================
+    // Setting a second hook with the same name will overwrite previous hook
+    j.set('duplicate', 'overwriteMe', () => console.log('This will never appear'));
+    j.set('duplicate', 'overwriteMe', () => console.log('This will appear'));
+    j.fire('duplicate');
+    // =====================================================
+
+    // j.remove('eep');
+    // j.remove('fire', 'loggin');
   </script>
 </html>
