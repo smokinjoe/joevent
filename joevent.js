@@ -7,6 +7,9 @@ const j = (function () {
   const _callHook = (method, args, context) => {
     method.apply(context, args);
   };
+  const _isDef = (arg) => {
+    return typeof arg !== 'undefined';
+  }
 
   // public methods
   return {
@@ -29,18 +32,19 @@ const j = (function () {
         console.log(string);
       }
 
-      // Optimize this - reduce to if/else
-      if (typeof name === 'undefined') {
-        delete hooks[e];
-      }
-      else if (typeof hooks[e][name] !== 'undefined') {
-        delete hooks[e][name];
+      if (_isDef(hooks[e])) {
+        if (_isDef(hooks[e][name])) {
+          delete hooks[e][name];
+        }
+        else {
+          delete hooks[e];
+        }
       }
     },
     fire: (e, context = self) => {
       if (debug) console.log('FIRE: ' + e);
 
-      if (typeof hooks[e] !== 'undefined') {
+      if (_isDef(hooks[e])) {
         for (let key in hooks[e]) {
           let hook = hooks[e][key];
           _callHook(hook.method, hook.args, context);
@@ -49,11 +53,11 @@ const j = (function () {
     },
     list: (e, name) => {
       if (debug) {
-        if (e && name) {
-          if (typeof hooks[e][name] !== 'undefined') console.log("LIST: ", hooks[e][name]);
-        }
-        else if (e) {
-          if (typeof hooks[e] !== 'undefined') {
+        if (e && _isDef(hooks[e])) {
+          if (name && _isDef(hooks[e][name])) {
+            console.log("LIST: ", hooks[e][name]);
+          }
+          else {
             console.log("LIST: hooks["+e+"]:", hooks[e]);
           }
         }
