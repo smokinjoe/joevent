@@ -18,6 +18,7 @@ const j = (function () {
         console.log('SET: ' + ( name ? name : 'all') + ' for ' + e);
       }
 
+      // See if you can switch to Object.assign
       hooks[e] = hooks[e] || {};
       hooks[e][name] = hooks[e][name] || [];
 
