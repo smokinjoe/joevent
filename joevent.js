@@ -4,10 +4,8 @@ const j = (function () {
   let hooks = {};
 
   // private methods
-  let _callHook = (method, args = [], context) => {
-    const argsWithContext = args.slice();
-    argsWithContext.push(context);
-    method.apply(window, argsWithContext);
+  const _callHook = (method, args, context) => {
+    method.apply(context, args);
   };
 
   // public methods
