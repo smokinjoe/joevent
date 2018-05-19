@@ -1,10 +1,10 @@
-var j = (function () {
+const j = (function () {
   // private vars
-  var debug = false;
-  var hooks = {};
+  let debug = false;
+  let hooks = {};
 
   // private methods
-  var _callHook = (method, args, context) => {
+  let _callHook = (method, args, context) => {
     args.push(context);  // should this be here or in fire() ?
     method.apply(window, args);
   };
@@ -13,7 +13,7 @@ var j = (function () {
   return {
     set: (e, name, method, args) => {
       if (debug) {
-        console.log('set: ' +( name ? name : 'all') + ' for ' + e);
+        console.log('SET: ' + ( name ? name : 'all') + ' for ' + e);
       }
 
       hooks[e] = hooks[e] || {};
@@ -26,7 +26,7 @@ var j = (function () {
     },
     remove: (e, name) => {
       if (debug) {
-        var string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'remove all for ' + e;
+        let string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'remove all for ' + e;
         console.log(string);
       }
 
@@ -37,14 +37,12 @@ var j = (function () {
         delete hooks[e][name];
       }
     },
-    fire: (e, context) => {
+    fire: (e, context = self) => {
       if (debug) console.log('FIRE: ' + e);
 
-      var context = context || self;
-
       if (typeof hooks[e] !== 'undefined') {
-        for (var key in hooks[e]) {
-          var hook = hooks[e][key];
+        for (let key in hooks[e]) {
+          let hook = hooks[e][key];
           _callHook(hook.method, hook.args, context);
         }
       }
