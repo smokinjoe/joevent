@@ -4,14 +4,15 @@ const j = (function () {
   let hooks = {};
 
   // private methods
-  let _callHook = (method, args, context) => {
-    args.push(context);  // should this be here or in fire() ?
-    method.apply(window, args);
+  let _callHook = (method, args = [], context) => {
+    const argsWithContext = args.slice();
+    argsWithContext.push(context);
+    method.apply(window, argsWithContext);
   };
 
   // public methods
   return {
-    set: (e, name, method, args) => {
+    set: (e, name, method, args = []) => {
       if (debug) {
         console.log('SET: ' + ( name ? name : 'all') + ' for ' + e);
       }
@@ -21,7 +22,7 @@ const j = (function () {
 
       hooks[e][name] = {
         'method' : method,
-        'args' : (typeof args === Array) ? args : [args] // this needs to be an array
+        'args' : Array.isArray(args) ? args : [args] // this needs to be an array
       };
     },
     remove: (e, name) => {
