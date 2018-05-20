@@ -13,9 +13,9 @@ const j = (function () {
 
   // public methods
   return {
-    set: (e, name, method, args = []) => {
+    on: (e, name, method, args = []) => {
       if (debug) {
-        console.log('SET: ' + ( name ? name : 'all') + ' for ' + e);
+        console.log('Setting: ' + ( name ? name : 'all') + ' for ' + e);
       }
 
       // See if you can switch to Object.assign
@@ -27,7 +27,7 @@ const j = (function () {
         'args' : Array.isArray(args) ? args : [args] // this needs to be an array
       };
     },
-    remove: (e, name) => {
+    off: (e, name) => {
       if (debug) {
         let string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'remove all for ' + e;
         console.log(string);
@@ -42,8 +42,8 @@ const j = (function () {
         }
       }
     },
-    fire: (e, context = self) => {
-      if (debug) console.log('FIRE: ' + e);
+    emit: (e, context = self) => {
+      if (debug) console.log('EMIT: ' + e);
 
       if (_isDef(hooks[e])) {
         for (let key in hooks[e]) {
@@ -72,5 +72,3 @@ const j = (function () {
     }
   };
 }());
-
-//joevent.set('the_event', 'hook_name', f(), args);

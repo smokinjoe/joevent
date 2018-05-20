@@ -10,7 +10,7 @@
   </body>
   <script type="text/javascript">
 
-    // Uncomment below to view all sets/fires/removes and be
+    // Uncomment below to view all sets/emits/removes and be
     // able to utilize j.list() to view any and all hooks set
     j.debug();
 
@@ -23,8 +23,8 @@
       console.log(string1 + ' ' + string2);
     };
 
-    j.set('welcome', 'welcomer', welcomer, [arg1, arg2]);
-    j.fire('welcome'); // Output: Hello World
+    j.on('welcome', 'welcomer', welcomer, [arg1, arg2]);
+    j.emit('welcome'); // Output: Hello World
     // =====================================================
 
 
@@ -38,27 +38,27 @@
       console.log(this.name);
     }
 
-    j.set('name', 'obj1', outputName);
-    j.fire('name', obj1); // Output: joe
-    j.fire('name'); // Output: window
-    j.fire('name', obj2); // Output: ed
+    j.on('name', 'obj1', outputName);
+    j.emit('name', obj1); // Output: joe
+    j.emit('name'); // Output: window
+    j.emit('name', obj2); // Output: ed
     // =====================================================
 
     // =====================================================
     // Setting a second hook with the same name will overwrite previous hook
-    j.set('duplicate', 'overwriteMe', () => console.log('This will never appear'));
-    j.set('duplicate', 'overwriteMe', () => console.log('This will appear'));
-    j.fire('duplicate'); // Output: This will appear
+    j.on('duplicate', 'overwriteMe', () => console.log('This will never appear'));
+    j.on('duplicate', 'overwriteMe', () => console.log('This will appear'));
+    j.emit('duplicate'); // Output: This will appear
     // =====================================================
 
     // =====================================================
     // You can also remove hooks if you'd like - by name or event
-    j.set('test', 'removeMe', () => console.log('You wont see me'));
-    j.set('test', 'sticksAround', () => console.log('Hello from sticksAround!'));
-    j.remove('test', 'removeMe');
-    j.fire('test'); // Output: Hello from sticksAround!
-    j.remove('test');
-    j.fire('test'); // Nothing will be output because all were removed
+    j.on('test', 'removeMe', () => console.log('You wont see me'));
+    j.on('test', 'sticksAround', () => console.log('Hello from sticksAround!'));
+    j.off('test', 'removeMe');
+    j.emit('test'); // Output: Hello from sticksAround!
+    j.off('test');
+    j.emit('test'); // Nothing will be output because all were removed
     // =====================================================
 
   </script>
