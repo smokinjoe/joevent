@@ -15,7 +15,7 @@ const j = (function () {
   return {
     on: (e, name, method, args = []) => {
       if (debug) {
-        console.log('Setting: ' + ( name ? name : 'all') + ' for ' + e);
+        console.log('SETTING: ' + ( name ? name : 'all') + ' for ' + e);
       }
 
       // See if you can switch to Object.assign
@@ -29,7 +29,7 @@ const j = (function () {
     },
     off: (e, name) => {
       if (debug) {
-        let string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'remove all for ' + e;
+        let string = name ? 'REMOVE: ' + e + '[' + name + ']' : 'REMOVE: all for ' + e;
         console.log(string);
       }
 
