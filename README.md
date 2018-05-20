@@ -1,6 +1,8 @@
 # joevent
 Pretty simple event API
 
+Use case: when the context that the event handler is to be executed within needs to change.
+
 Even simpler documentation (can be found in index.html):
 
     // Uncomment below to view all sets/emits/removes and be
