@@ -3,7 +3,7 @@ Pretty simple event API
 
 Use case: when the context that the event handler is to be executed within needs to change.
 
-Even simpler documentation (can be found in index.html):
+Documentation (can be found in index.html):
 
     // Uncomment below to view all sets/emits/removes and be
     // able to utilize j.list() to view any and all hooks set
@@ -18,7 +18,7 @@ Even simpler documentation (can be found in index.html):
       console.log(string1 + ' ' + string2);
     };
 
-    j.on('welcome', 'welcomer', welcomer, [arg1, arg2]);
+    j.on('welcome', 'welcome the user', welcomer, [arg1, arg2]);
     j.emit('welcome'); // Output: Hello World
     // =====================================================
 
@@ -33,7 +33,7 @@ Even simpler documentation (can be found in index.html):
       console.log(this.name);
     }
 
-    j.on('name', 'obj1', outputName);
+    j.on('name', 'changing context', outputName);
     j.emit('name', obj1); // Output: joe
     j.emit('name'); // Output: window
     j.emit('name', obj2); // Output: ed
