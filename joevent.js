@@ -1,9 +1,7 @@
 const j = (function () {
-  // private vars
   let debug = false;
   let hooks = {};
 
-  // private methods
   const _callHook = (method, args, context) => {
     method.apply(context, args);
   };
@@ -11,20 +9,18 @@ const j = (function () {
     return typeof arg !== 'undefined';
   }
 
-  // public methods
   return {
     on: (e, name, method, args = []) => {
       if (debug) {
         console.log('SETTING: ' + ( name ? name : 'all') + ' for ' + e);
       }
 
-      // See if you can switch to Object.assign
       hooks[e] = hooks[e] || {};
       hooks[e][name] = hooks[e][name] || [];
 
       hooks[e][name] = {
         'method' : method,
-        'args' : Array.isArray(args) ? args : [args] // this needs to be an array
+        'args' : Array.isArray(args) ? args : [args]
       };
     },
     off: (e, name) => {
